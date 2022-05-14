@@ -7,12 +7,14 @@ class Game {
     sizeX;
     sizeY;
     $canvas;
+    board;
 
-    constructor($canvas, sizeX, sizeY) {
+    constructor($canvas, sizeX, sizeY, board) {
         this.context = $canvas.getContext("2d");
         this.$canvas = $canvas;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.board = board;
     }
 
     start() {
@@ -24,17 +26,22 @@ class Game {
     tick() {
         this.clear();
 
+        this.board.update(this.gravity, this.intervalTime, this.sizeX, this.sizeY);
+        this.board.draw(this.context);
+
         for(let gameObject of this.gameObjects) {
             gameObject.update(this.gravity, this.intervalTime, this.sizeX, this.sizeY);
             gameObject.draw(this.context);
+
+            gameObject.checkCollision(this.board.x, this.board.x + this.board.width, this.board.y, this.board.y + this.board.height);
         }
     }
 
-    onMouseMoved(event, board) {
+    onMouseMoved(event) {
         let pos = this.getMousePos(event);
         this.cleanPosition(pos);
 
-        board.updatePosition(pos.x);
+        this.board.updatePosition(pos.x);
     }
 
     getMousePos(event) {

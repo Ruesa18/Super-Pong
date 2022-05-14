@@ -22,4 +22,8 @@ class GameObject {
     draw(context) {
         throw new Error("Method 'update()' not implemented!");
     }
+
+    checkCollision(x1, x2, y1, y2) {
+        throw new Error("Method 'checkCollision()' not implemented!");
+    }
 }
