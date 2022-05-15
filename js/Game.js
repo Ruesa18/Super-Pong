@@ -3,7 +3,6 @@ class Game {
     gameInterval;
     intervalTime = 50;
     gameObjects = [];
-    gravity = 4.905;
     sizeX;
     sizeY;
     $canvas;
@@ -26,11 +25,11 @@ class Game {
     tick() {
         this.clear();
 
-        this.board.update(this.gravity, this.intervalTime, this.sizeX, this.sizeY);
+        this.board.update(this.sizeX, this.sizeY);
         this.board.draw(this.context);
 
         for(let gameObject of this.gameObjects) {
-            gameObject.update(this.gravity, this.intervalTime, this.sizeX, this.sizeY);
+            gameObject.update(this.sizeX, this.sizeY);
             gameObject.draw(this.context);
 
             gameObject.checkCollision(this.board.x, this.board.x + this.board.width, this.board.y, this.board.y + this.board.height);
@@ -42,6 +41,11 @@ class Game {
         this.cleanPosition(pos);
 
         this.board.updatePosition(pos.x);
+    }
+
+    onBallDied() {
+        this.stop();
+        console.log("Game ended");
     }
 
     getMousePos(event) {

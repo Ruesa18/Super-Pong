@@ -15,7 +15,7 @@ class GameObject {
         this.width = width;
     }
 
-    update(gravity, timeEvolved, maxX, maxY) {
+    update(maxX, maxY) {
         throw new Error("Method 'update()' not implemented!");
     }
 

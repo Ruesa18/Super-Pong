@@ -1,14 +1,42 @@
 class Ball extends GameObject {
     ySpeed = 25;
+    xSpeed = 5;
+    onDyingCallback;
 
-    update(gravity, timeEvolved, maxX, maxY) {
-        //this.ySpeed += gravity * timeEvolved / 100;
+    constructor(x = 0, y = 0, radius=10, onDyingCallback=null) {
+        super(x, y);
+        this.onDyingCallback = onDyingCallback;
+    }
 
+    update(maxX, maxY) {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
 
-        this.x = this.x >= maxX - this.width ? maxX - this.width : this.x;
-        this.y = this.y >= maxY - this.height ? maxY - this.height : this.y;
+        if(this.x < 0 - this.width) {
+            this.x = 0;
+            this.xSpeed = -this.xSpeed;
+        }
+
+        if(this.x >= maxX - this.width) {
+            this.x = maxX - this.width;
+            this.xSpeed = -this.xSpeed;
+        }
+        
+        if(this.y < 0 - this.height) {
+            this.y = 0;
+            this.ySpeed = -this.ySpeed;
+        }
+        
+        if(this.y >= maxY - this.height) {
+            this.y = maxY - this.height;
+            this.ySpeed = -this.ySpeed;
+            
+            if(typeof this.onDyingCallback == "function") {
+                this.onDyingCallback();
+            }else{
+                throw new Error("Ball has hit the bottom of the board");
+            }
+        }
     }
 
     draw(context) {

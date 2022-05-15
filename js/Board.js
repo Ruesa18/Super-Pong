@@ -1,6 +1,6 @@
 class Board extends GameObject {
 
-    update(gravity, timeEvolved, maxX, maxY) {
+    update(maxX, maxY) {
 
     }
 
