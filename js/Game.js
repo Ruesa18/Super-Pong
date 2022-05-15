@@ -7,6 +7,8 @@ class Game {
     sizeY;
     $canvas;
     board;
+    boardHitCounter = 0;
+    speedIncreasedCounter = 0;
 
     constructor($canvas, sizeX, sizeY, board) {
         this.context = $canvas.getContext("2d");
@@ -29,11 +31,46 @@ class Game {
         this.board.draw(this.context);
 
         for(let gameObject of this.gameObjects) {
+            this.applySpecialMode(gameObject);
+
             gameObject.update(this.sizeX, this.sizeY);
             gameObject.draw(this.context);
 
-            gameObject.checkCollision(this.board.x, this.board.x + this.board.width, this.board.y, this.board.y + this.board.height);
+            let collidedWithBoard = gameObject.checkCollision(this.board.x, this.board.x + this.board.width, this.board.y, this.board.y + this.board.height);
+
+            if(collidedWithBoard) {
+                this.boardHitCounter++;
+            }
         }
+    }
+
+    applySpecialMode(gameObject) {
+        if(this.boardHitCounter >= 10) {
+            if(gameObject.y <= this.sizeY * 0.6) {
+                if(this.generateRandomInt(0, 100) <= 5) {
+                    gameObject.xSpeed = this.generateRandomInt(-15, 15);
+                }
+            }
+
+            if(this.boardHitCounter % 5 == 0) {
+                if(this.speedIncreasedCounter == 0) {
+                    gameObject.ySpeed = gameObject.ySpeed * 1.1;
+                }
+                this.speedIncreasedCounter++;
+                if(this.speedIncreasedCounter % 50 == 0) {
+                    gameObject.ySpeed = gameObject.ySpeed * 1.1;
+                }
+            }
+        }
+    }
+
+    generateRandomInt(min = 0, max = 100) {
+        let difference = max - min;
+        let number = Math.random();
+
+        number = Math.floor( number * difference);
+
+        return number + min;
     }
 
     onMouseMoved(event) {
