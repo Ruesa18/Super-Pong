@@ -5,8 +5,8 @@ class GameObject {
     width;
     xSpeed = 0;
     ySpeed = 0;
-    fillStyle = "#000";
-    strokeStyle = "#000";
+    fillColor = "#000";
+    strokeColor = "#000";
 
     constructor(x = 0, y = 0, height = 10, width = 10) {
         this.x = x;

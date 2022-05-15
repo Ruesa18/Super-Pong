@@ -9,6 +9,7 @@ class Board extends GameObject {
         context.fillStyle = this.fillColor;
         context.strokeStyle = this.strokeColor;
         context.rect(this.x, this.y, this.width, this.height);
+        context.fill();
         context.stroke();
     }
 

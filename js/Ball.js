@@ -12,23 +12,23 @@ class Ball extends GameObject {
         this.x += this.xSpeed;
         this.y += this.ySpeed;
 
-        if(this.x < 0 - this.width) {
+        if(this.x <= 0) {
             this.x = 0;
             this.xSpeed = -this.xSpeed;
         }
 
-        if(this.x >= maxX - this.width) {
-            this.x = maxX - this.width;
+        if(this.x + this.width / 2 >= maxX) {
+            this.x = maxX - this.width / 2;
             this.xSpeed = -this.xSpeed;
         }
         
-        if(this.y < 0 - this.height) {
-            this.y = 0;
+        if(this.y - this.height / 2 <= 0) {
+            this.y = 0 + this.height / 2;
             this.ySpeed = -this.ySpeed;
         }
         
-        if(this.y >= maxY - this.height) {
-            this.y = maxY - this.height;
+        if(this.y >= maxY - this.height / 2) {
+            this.y = maxY - this.height / 2;
             this.ySpeed = -this.ySpeed;
             
             if(typeof this.onDyingCallback == "function") {

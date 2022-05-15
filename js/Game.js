@@ -1,7 +1,7 @@
 class Game {
     context;
     gameInterval;
-    intervalTime = 50;
+    intervalTime = 30;
     gameObjects = [];
     sizeX;
     sizeY;
