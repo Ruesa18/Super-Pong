@@ -1,5 +1,5 @@
 # Super Pong
-A single-player pong with a little twist.
+A singleplayer pong with a little twist.
 
 You can play against yourself in a basic pong game. After 10 times of hitting the ball, a special mode will be triggered. This mode will randomly change the direction of the ball every once in a while. This makes the game a bit more interesting.
 The special mode also increases the speed regularly. This means that it not only gets difficult because the ball decides to go another way, it also gets more difficult the longer you play.
