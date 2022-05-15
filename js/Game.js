@@ -9,13 +9,16 @@ class Game {
     board;
     boardHitCounter = 0;
     speedIncreasedCounter = 0;
+    score = 0;
+    $scoreboard;
 
-    constructor($canvas, sizeX, sizeY, board) {
+    constructor($canvas, sizeX, sizeY, board, $scoreboard) {
         this.context = $canvas.getContext("2d");
         this.$canvas = $canvas;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.board = board;
+        this.$scoreboard = $scoreboard;
     }
 
     start() {
@@ -40,8 +43,11 @@ class Game {
 
             if(collidedWithBoard) {
                 this.boardHitCounter++;
+                this.updateScore();
             }
         }
+
+        this.updateUI();
     }
 
     applySpecialMode(gameObject) {
@@ -62,6 +68,15 @@ class Game {
                 }
             }
         }
+    }
+
+    updateUI() {
+        this.$scoreboard.querySelector(".score").textContent = "Score " + this.score;
+        this.$scoreboard.querySelector(".mode").textContent = this.boardHitCounter >= 10 ? "Mode activated" : 10 - this.boardHitCounter;
+    }
+
+    updateScore() {
+        this.score++;
     }
 
     generateRandomInt(min = 0, max = 100) {
