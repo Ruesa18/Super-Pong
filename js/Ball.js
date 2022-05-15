@@ -4,7 +4,7 @@ class Ball extends GameObject {
     onDyingCallback;
 
     constructor(x = 0, y = 0, radius=10, onDyingCallback=null) {
-        super(x, y);
+        super(x, y, radius, radius);
         this.onDyingCallback = onDyingCallback;
     }
 
@@ -43,13 +43,13 @@ class Ball extends GameObject {
         context.beginPath();
         context.fillStyle = this.fillColor;
         context.strokeStyle = this.strokeColor;
-        context.arc(this.x, this.y, this.height, 0, 2 * Math.PI);
+        context.arc(this.x, this.y, this.height / 2, 0, 2 * Math.PI);
         context.fill();
         context.stroke();
     }
 
     checkCollision(x1, x2, y1, y2) {
-        if(this.y + this.height > y1) {
+        if(this.y + this.height >= y1) {
             if(this.x + this.width > x1 && this.x + this.width < x2 || this.x < x2 && this.x > x1) {
                 this.ySpeed = -this.ySpeed;
                 return true;
