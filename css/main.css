@@ -43,7 +43,13 @@ main {
     flex-direction: column;
 }
 
+#super-pong-game canvas {
+    /*make enough space for the footer and the scoreboard*/
+    max-height: calc(100vh - 40px);
+}
+
 #scoreboard {
+    height: 20px;
     width: 90%;
     display: flex;
     justify-content: space-between;
@@ -69,6 +75,7 @@ main {
 }
 
 footer {
+    height: 20px;
     background: var(--color-primary);
     color: var(--color-tertiary);
 }
